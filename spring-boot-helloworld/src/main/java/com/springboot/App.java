@@ -19,7 +19,6 @@ public class App {
         ConfigurableApplicationContext context = SpringApplication.run(App.class);
         ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
         for (String beanDefinitionName : beanFactory.getBeanDefinitionNames()) {
-            System.out.println(beanDefinitionName);
             Object bean = beanFactory.getBean(beanDefinitionName);
             if (bean instanceof CharacterEncodingFilter) {
                 CharacterEncodingFilter filter = (CharacterEncodingFilter) bean;
