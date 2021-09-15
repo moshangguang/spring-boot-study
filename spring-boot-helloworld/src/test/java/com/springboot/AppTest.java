@@ -2,6 +2,7 @@ package com.springboot;
 
 import com.springboot.entity.Cat;
 import com.springboot.entity.Dog;
+import com.springboot.entity.Student;
 import com.springboot.entity.Teacher;
 import org.springframework.asm.ClassReader;
 import org.junit.Test;
@@ -25,6 +26,13 @@ public class AppTest {
     private Cat cat;
     @Autowired
     private Dog dog;
+
+    @Test
+    public void test03() {
+        System.out.println(new Student());
+        System.out.println(new Student(2, "阿珍", 26));
+        System.out.println(new Student(1, "阿强"));
+    }
 
     @Test
     public void test02() {
