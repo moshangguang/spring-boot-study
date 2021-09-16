@@ -6,3 +6,29 @@
 #  servlet:
 #    multipart:
 #      max-file-size: 5MB
+boss:
+  name: 张三
+  age: 50
+  birth: 2021/9/16
+  favorite:
+    - 篮球
+    - 足球
+    - Dota
+  friends: [ 李四,王五 ]
+  cats:
+    - { name: 大花,age: 2,weight: 20 }
+    - name: 小花
+      age: 1
+      weight: 15
+  dogs: [ { name: 大黄,age: 5,color: 黄色 },{ name: 大黑,age: 7,color: 黑色 } ]
+  workers:
+    #行政部
+    administration:
+      - { name: 小红,age: 20 }
+      - { name: 小丽,age: 25 }
+    #销售部
+    sale:
+      - name: 张三
+        age: 30
+      - { name: 小王, age: 29 }
+

@@ -1,9 +1,6 @@
 package com.springboot;
 
-import com.springboot.entity.Cat;
-import com.springboot.entity.Dog;
-import com.springboot.entity.Student;
-import com.springboot.entity.Teacher;
+import com.springboot.entity.*;
 import org.springframework.asm.ClassReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,12 +23,25 @@ public class AppTest {
     private Cat cat;
     @Autowired
     private Dog dog;
+    @Autowired
+    private Boss boss;
+
+    @Test
+    public void test04() {
+        System.out.println(boss);
+    }
 
     @Test
     public void test03() {
-        System.out.println(new Student());
-        System.out.println(new Student(2, "阿珍", 26));
-        System.out.println(new Student(1, "阿强"));
+        Student student = new Student();
+        System.out.println(student);
+        Student student1 = new Student(2, "阿珍", 26);
+        System.out.println(student1);
+        Student student2 = new Student(1, "阿强");
+        student2.setAge(30);
+        System.out.println(student2);
+        Student student3 = new Student(2, "阿珍", 26);
+        System.out.println(student1.equals(student3));
     }
 
     @Test
