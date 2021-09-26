@@ -1,13 +1,21 @@
 package com.springboot;
 
 import com.springboot.entity.*;
+import com.springboot.service.A4Service;
+import com.springboot.service.BService;
+import com.springboot.service.CService;
+import com.springboot.service.DService;
 import org.springframework.asm.ClassReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.type.classreading.AnnotationMetadataReadingVisitor;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,6 +33,71 @@ public class AppTest {
     private Dog dog;
     @Autowired
     private Boss boss;
+    @Autowired
+    private BeanFactory beanFactory;
+    @Autowired
+    private BService bService;
+    @Autowired
+    @Qualifier("f1")
+    private F f1;
+    @Autowired
+    @Qualifier("f2")
+    private F f2;
+    @Autowired
+    @Qualifier("f3")
+    private F f3;
+    @Autowired
+    private CService cService;
+    @Autowired
+    private DService dService;
+
+    @Test
+    public void test010() {
+        System.out.println(beanFactory.getBean("a3Service", new A4Service()));
+        System.out.println(beanFactory.getBean("a3Service", new A4Service()));
+
+        System.out.println(beanFactory.getBean("a3Service", new A4Service(), new A4Service()));
+        try {
+            //beanFactory.getBean("a3Service", new A4Service(), new A4Service(), new A4Service());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test09() {
+        System.out.println(cService.getDService().getClass());
+        System.out.println(dService.getCService().getClass());
+        System.out.println("=========");
+        cService.getDService().sayHello();
+        dService.getCService().sayHello();
+    }
+
+    @Test
+    public void test08() {
+        System.out.println(cService.getClass());
+        cService.sayHello();
+    }
+
+    @Test
+    public void test07() {
+        System.out.println("f1====>" + f1);
+        System.out.println("f2====>" + f2);
+        System.out.println("f3====>" + f3);
+    }
+
+    @Test
+    public void test06() {
+        System.out.println(bService.getT());
+        System.out.println(bService.getS());
+    }
+
+    @Test
+    public void test05() {
+        AnnotationConfigApplicationContext configApplicationContext = new AnnotationConfigApplicationContext();
+        configApplicationContext.registerShutdownHook();
+        configApplicationContext.close();
+    }
 
     @Test
     public void test04() {

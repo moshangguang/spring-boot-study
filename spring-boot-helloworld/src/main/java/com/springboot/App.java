@@ -8,13 +8,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
-//@EnableAutoConfiguration
+@Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 //@ComponentScan(basePackages = {"com.springboot", "com.thirdparty"})
 public class App {
     public static void main(String[] args) {

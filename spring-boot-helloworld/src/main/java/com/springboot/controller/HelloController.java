@@ -1,12 +1,17 @@
 package com.springboot.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.springboot.entity.Worker;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HelloController {
     @RequestMapping("/hello")
     public String hello() {
         return "hello spring boot";
+    }
+
+    @PostMapping("/worker")
+    public Worker helloWorker(@RequestBody Worker worker) {
+        return worker;
     }
 }
