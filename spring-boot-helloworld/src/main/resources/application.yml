@@ -31,4 +31,25 @@ boss:
       - name: 张三
         age: 30
       - { name: 小王, age: 29 }
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  server:
+#    port: 10111
+#    servlet:
+#      context-path: /
+#    ssl:
+#      enabled: false
+#  endpoint:
+#    health:
 
+#management是所有actuator的配置
+management:
+  endpoints:
+    enabled-by-default: true #默认开启所有监控端点
+    web:
+      exposure:
+        include: '*' #以web方式暴露所有端点
+#      show-details: always
