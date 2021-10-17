@@ -1,10 +1,14 @@
 package com.springboot;
 
+import com.alibaba.fastjson.JSON;
 import com.springboot.entity.*;
 import com.springboot.service.A4Service;
 import com.springboot.service.BService;
 import com.springboot.service.CService;
 import com.springboot.service.DService;
+import lombok.NoArgsConstructor;
+import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.shiro.realm.SimpleAccountRealm;
 import org.junit.Before;
 import org.springframework.asm.ClassReader;
@@ -25,7 +29,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -57,6 +63,32 @@ public class AppTest {
     private DService dService;
     @Autowired
     private DefaultListableBeanFactory defaultListableBeanFactory;
+    private final static String TOPIC_NAME = "my-replicated-topic";
+
+    @Test
+    public void test12() throws ExecutionException, InterruptedException {
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.6.86:9092,192.168.6.86:9093,192.168.6.86:9094");
+        props.put(ProducerConfig.RETRIES_CONFIG, 3);
+        props.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 300);
+        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 10);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        Producer<String, String> producer = new KafkaProducer<String, String>(props);
+        int msgNum = 5;
+        for (int i = 1; i <= msgNum; i++) {
+            Student student = new Student(i, "A" + i);
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>(TOPIC_NAME
+                    , Integer.valueOf(student.getId()).toString(), JSON.toJSONString(student));
+            RecordMetadata metadata = producer.send(producerRecord).get();
+            System.out.println("同步方式发送消息结果：" + "topic-" + metadata.topic() + "|partition-"
+                    + metadata.partition() + "|offset-" + metadata.offset());
+        }
+
+
+    }
 
     @Test
     public void test011() {
