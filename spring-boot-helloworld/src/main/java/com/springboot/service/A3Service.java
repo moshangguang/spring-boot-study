@@ -10,6 +10,7 @@ public class A3Service {
     @Autowired
     private A4Service a4Service;
 
+    @Autowired
     public A3Service(A4Service a4Service) {
         System.out.println("调用A3Service(A4Service a4Service)...");
     }

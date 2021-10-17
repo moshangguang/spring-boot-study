@@ -5,6 +5,8 @@ import com.springboot.service.A4Service;
 import com.springboot.service.BService;
 import com.springboot.service.CService;
 import com.springboot.service.DService;
+import org.apache.shiro.realm.SimpleAccountRealm;
+import org.junit.Before;
 import org.springframework.asm.ClassReader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +22,9 @@ import org.springframework.core.type.classreading.AnnotationMetadataReadingVisit
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -52,7 +56,19 @@ public class AppTest {
     private DService dService;
 
     @Test
-    public void test010() {
+    public void test11() {
+        System.out.println(Math.pow(16, 6));
+        new HashMap<>().put(1, 1);
+        new HashMap<>().remove(1);
+        new ConcurrentHashMap<>();
+        int a = 1, b = 2, c = 3;
+        a = b = c;
+        System.out.println(a + " " + b);
+
+    }
+
+    @Test
+    public void test10() {
         System.out.println(beanFactory.getBean("a3Service", new A4Service()));
         System.out.println(beanFactory.getBean("a3Service", new A4Service()));
 

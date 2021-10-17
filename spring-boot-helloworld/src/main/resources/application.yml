@@ -52,4 +52,23 @@ management:
     web:
       exposure:
         include: '*' #以web方式暴露所有端点
-#      show-details: always
+      show-details: always
+  # http://localhost:8080/actuator/health
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+#http://localhost:8080/actuator/info
+info:
+  appName: boot-helloworld
+  appVersion: 1.0.0
+  mavenProjectName: @project.artifactId@
+  mavenProjectVersion: @project.version@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:8081
+  application:
+    name: boot-helloworld
+
