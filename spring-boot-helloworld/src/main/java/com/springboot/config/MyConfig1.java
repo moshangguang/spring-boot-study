@@ -1,18 +1,17 @@
 package com.springboot.config;
 
-import com.springboot.entity.C;
-import com.springboot.entity.Cat;
-import com.springboot.entity.Dog;
-import com.springboot.entity.F;
+import com.springboot.entity.*;
 import com.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(Dog.class)
+@Import(G.class)
 public class MyConfig1 {
     @Bean
     public Cat cat() {

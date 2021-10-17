@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,6 +55,15 @@ public class AppTest {
     private CService cService;
     @Autowired
     private DService dService;
+    @Autowired
+    private DefaultListableBeanFactory defaultListableBeanFactory;
+
+    @Test
+    public void test011() {
+        System.out.println("a1Service:" + defaultListableBeanFactory.getBeanDefinition("a1Service").getClass());
+        System.out.println("userService:" + defaultListableBeanFactory.getBeanDefinition("userService").getClass());
+        System.out.println("g:" + defaultListableBeanFactory.getBeanDefinition(G.class.getName()).getClass());
+    }
 
     @Test
     public void test11() {
